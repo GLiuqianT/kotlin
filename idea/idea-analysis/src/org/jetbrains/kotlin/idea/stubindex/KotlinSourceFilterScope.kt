@@ -73,8 +73,10 @@ class KotlinSourceFilterScope private constructor(
         return true
     }
 
-    override fun hashCode(): Int {
-        var result = super.hashCode()
+    override fun hashCode(): Int = super.hashCode()
+
+    override fun calcHashCode(): Int {
+        var result = super.calcHashCode()
         result = 31 * result + includeProjectSourceFiles.hashCode()
         result = 31 * result + includeLibrarySourceFiles.hashCode()
         result = 31 * result + includeClassFiles.hashCode()

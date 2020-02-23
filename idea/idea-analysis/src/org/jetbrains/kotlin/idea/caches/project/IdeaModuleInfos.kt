@@ -259,7 +259,9 @@ private class ModuleProductionSourceScope(module: Module) : ModuleSourceScope(mo
     }
 
     // KT-6206
-    override fun hashCode(): Int = 31 * module.hashCode()
+    override fun hashCode(): Int = super.hashCode()
+
+    override fun calcHashCode(): Int = 31 * module.hashCode()
 
     override fun contains(file: VirtualFile) =
         moduleFileIndex.isInSourceContentWithoutInjected(file) && !moduleFileIndex.isInTestSourceContentKotlinAware(file)
@@ -276,7 +278,9 @@ private class ModuleTestSourceScope(module: Module) : ModuleSourceScope(module) 
     }
 
     // KT-6206
-    override fun hashCode(): Int = 37 * module.hashCode()
+    override fun hashCode(): Int = super.hashCode()
+
+    override fun calcHashCode(): Int = 37 * module.hashCode()
 
     override fun contains(file: VirtualFile) = moduleFileIndex.isInTestSourceContentKotlinAware(file)
 
@@ -325,6 +329,7 @@ open class LibraryInfo(val project: Project, val library: Library) : IdeaModuleI
     }
 
     override fun hashCode(): Int = 43 * library.hashCode()
+
 }
 
 data class LibrarySourceInfo(val project: Project, val library: Library, override val binariesModuleInfo: BinaryModuleInfo) :
@@ -395,7 +400,9 @@ private class LibraryWithoutSourceScope(project: Project, private val library: L
 
     override fun equals(other: Any?) = other is LibraryWithoutSourceScope && library == other.library
 
-    override fun hashCode() = library.hashCode()
+    override fun hashCode(): Int = super.hashCode()
+
+    override fun calcHashCode(): Int = library.hashCode()
 
     override fun toString() = "LibraryWithoutSourceScope($library)"
 }
@@ -407,7 +414,9 @@ private class LibrarySourceScope(project: Project, private val library: Library)
 
     override fun equals(other: Any?) = other is LibrarySourceScope && library == other.library
 
-    override fun hashCode() = library.hashCode()
+    override fun hashCode(): Int = super.hashCode()
+
+    override fun calcHashCode(): Int = library.hashCode()
 
     override fun toString() = "LibrarySourceScope($library)"
 }
@@ -418,7 +427,9 @@ private class SdkScope(project: Project, val sdk: Sdk) :
 
     override fun equals(other: Any?) = other is SdkScope && sdk == other.sdk
 
-    override fun hashCode() = sdk.hashCode()
+    override fun hashCode(): Int = super.hashCode()
+
+    override fun calcHashCode(): Int = sdk.hashCode()
 
     override fun toString() = "SdkScope($sdk)"
 }
